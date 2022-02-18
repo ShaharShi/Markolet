@@ -1,0 +1,19 @@
+<div class="d-flex h-100">
+    <app-cart [readOnlyCart]="true"></app-cart>
+    <div class="d-flex w-100 h-100 darker-text">
+        <div class="content-container position-relative d-flex m-auto">
+            <div class="box-caption lg-text">Order</div>
+            <div class="d-flex flex-column justify-content-end align-items-center">
+                <div class="flex-grow-1 d-flex align-items-center ">
+                    <h1 class="box-title">Order</h1>
+                </div>
+                <div class="h-75">
+                    <img [src]="IMAGES.groceries_bag.src" [alt]="IMAGES.groceries_bag.title" width="auto" height="100%"/>
+                </div>
+            </div>
+            <div class="w-75">
+                <app-order-form></app-order-form>
+            </div>
+        </div>
+    </div>
+</div>

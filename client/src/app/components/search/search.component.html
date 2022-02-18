@@ -1,0 +1,10 @@
+<div class="search-container">
+    <input 
+        #searchInput 
+        type="text" 
+        name="search" 
+        class="app-input"
+        (input)="handleChange($event.target)"
+        [placeholder]="placeholder"
+    />
+</div>

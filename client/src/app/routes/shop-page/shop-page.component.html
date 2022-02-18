@@ -1,0 +1,36 @@
+<div class="h-100 d-flex">
+    <app-cart></app-cart>
+    <div class="flex-grow-1 d-inline-flex flex-column">
+        <div class="actions-bar">
+            <div class="py-2">
+                <app-categories></app-categories>
+            </div>
+            <div class="d-flex justify-content-center p-2">
+                <app-search (searchTerm)="searchProducts($event)" class="w-25"></app-search>
+            </div>
+        </div>
+        <div class="flex-grow-1 overflow-auto">
+            <div *ngIf="fetchingProducts$ | async then default else products"></div>
+            <ng-template #products>
+                <div class="products-wrapper p-2" *ngIf="(products$ | async)?.length">
+                    <app-product-in-list *ngFor="let product of products$ | async" [data]="product" class="d-flex flex-grow-1"></app-product-in-list>
+                    <!-- the next div that run on array of 10 nulls, 
+                        it's just a style solution for the last products that doesn't fit in the last row, and starts a new one and stretch because the flex-grow-1 class.
+                        so now the last products, share the last row with 10 empty divs, and aligned to the left.
+                    -->
+                    <div *ngFor="let empt of [null,null,null,null,null,null,null,null,null,null]" class="flex-grow-1"></div>
+                </div>
+                <div *ngIf="!(products$ | async)?.length" class="d-flex flex-column align-items-center justify-content-center text-center h-100 w-100">
+                    <img [src]="IMAGES.no_product_found.src" [alt]="IMAGES.no_product_found.title" width="30%"/>
+                    <p class="light-text fw-bold md-text mt-4">No Products Found</p>
+                    <span class="light-text sm-text">Your search did not match any products <br /> Please try again.</span>
+                </div>
+            </ng-template>
+            <ng-template #default>
+                <div class="d-flex justify-content-center align-items-center h-100 w-100">
+                    <mat-spinner></mat-spinner>
+                </div>
+            </ng-template>
+        </div>
+    </div>
+</div>

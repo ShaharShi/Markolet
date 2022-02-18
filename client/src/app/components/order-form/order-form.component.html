@@ -1,0 +1,63 @@
+<div class="p-2 h-100 dark-text">
+    <form class="d-flex flex-column justify-content-between md-text h-100" [formGroup]="form" (ngSubmit)="handleSubmit()" (change)="formError = ''">
+        <a class="navigate-back-link align-self-end md-text" routerLink="/shop"><mat-icon class="lg-text">reply</mat-icon> Back to Shopping</a>
+        <div>
+            <h3 class="border-bottom border-2 primary-text">Shipping Details:</h3>
+            <div>
+                <label>City: </label>
+                <select formControlName="city" class="app-input">
+                    <option value="">Choose City ...</option>
+                    <option *ngFor="let city of cities" [value]="city">{{ city | capitalizeWord: '-' }}</option>
+                </select>
+                <div class="error-message">
+                    <div *ngIf="form.get('city')?.invalid && form.get('city')?.dirty || form.get('city')?.touched" class="text-danger sm-text">
+                        <div *ngIf="form.get('city')?.errors?.['required']" [@errorMessageState]>City is a required field.</div>
+                        <div *ngIf="form.get('city')?.errors?.['typeErr'] && form.get('city')?.value.length" [@errorMessageState]> City must be one of the above list.'</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label>Street: </label>
+                <input formControlName="street" class="app-input"/>
+                <div class="error-message">
+                    <div *ngIf="form.get('street')?.invalid && form.get('street')?.dirty || form.get('street')?.touched" class="text-danger sm-text">
+                        <div *ngIf="form.get('street')?.errors?.['required']" [@errorMessageState]>Street is a required field.</div>
+                    </div>
+                </div> 
+            </div>
+            <div>
+                <label>Shipping Date: </label>
+                <input type="datetime-local" class="app-input" formControlName="shippingDate" [min]="minDate" [value]="minDate"/>
+                <div class="error-message">
+                    <div *ngIf="form.get('shippingDate')?.invalid && form.get('shippingDate')?.dirty || form.get('shippingDate')?.touched" class="text-danger sm-text">
+                        <div *ngIf="form.get('shippingDate')?.errors?.['required']" [@errorMessageState]>Shipping Date is a required field.</div>
+                        <div *ngIf="form.get('shippingDate')?.errors?.['earlyShippingDate']" [@errorMessageState]>Shipping Date field must be at least 8 hours from now !</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <h4 class="border-bottom border-2 primary-text m-0">Payments:</h4>
+            <div>
+                <label>Credit Card: </label>
+                <input formControlName="creditCard" class="app-input" />
+                <div class="error-message">
+                    <div *ngIf="form.get('creditCard')?.invalid && form.get('creditCard')?.dirty || form.get('creditCard')?.touched" class="text-danger sm-text">
+                        <div *ngIf="form.get('creditCard')?.errors?.['required']" [@errorMessageState]>Credit Card is a required field.</div>
+                        <div *ngIf="form.get('creditCard')?.errors?.['ccErr'] && form.get('creditCard')?.value.length" [@errorMessageState]>Unsupported credit card provider</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <div class="d-flex flex-column">
+                <div class="error-message justify-content-center text-danger sm-text">{{ formError }}</div>
+                <div class="d-flex">
+                    <button class="navigate-back-button default-button app-button primary-bg text-white md-text" routerLink="/shop">Back to Shopping</button>
+                    <button *ngIf="!(creatingOrder$ | async)" type="submit" class="default-button app-button secondary-bg text-white md-text ms-auto" [ngClass]="form.invalid ? 'dark-bg unclickable' : 'secondary-bg clickable'" [disabled]="form.invalid">Order</button>
+                    <span *ngIf="creatingOrder$ | async" class="spinner-border secondary-text ms-auto"></span>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,17 @@
+.categories-container {
+    width: 100%;
+    max-width: 100%;
+    min-width: 100%;
+    overflow: auto;
+}
+.active-icon {
+    filter: saturate(120%);
+}
+.inactive-icon {
+    opacity: .6;
+}
+::ng-deep .mat-tooltip {
+    font-family: Viga;
+    background-color: #fff;
+    box-shadow: 3px 2px 5px 1px rgb(0, 0, 0, 0.1);
+}

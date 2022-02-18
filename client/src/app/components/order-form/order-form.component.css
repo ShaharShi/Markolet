@@ -1,0 +1,12 @@
+.navigate-back-button {
+    display: none;
+}
+
+@media screen and (max-height: 700px) {
+    .navigate-back-button {
+        display: block;
+    }
+    .navigate-back-link {
+        display: none;
+    }
+}

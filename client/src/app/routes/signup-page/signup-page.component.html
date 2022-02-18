@@ -1,0 +1,118 @@
+<div class="overflow-hidden d-flex justify-content-center align-items-center h-100">
+    <div class="d-flex signup-form-container px-3" *ngIf="!firstStepCompleted" [@firstFormVisibilityState]="!firstStepCompleted">
+        <div class="w-50 d-flex flex-column justify-content-between align-items-center">
+            <div class="d-flex flex-column justify-content-center h-50 text-center">
+                <p class="primary-text primary-font xl-text">Signup</p>
+                <span class="md-text primary-font dark-text">Step 1</span>
+            </div>
+            <img [src]="IMAGES.vegetables_bag_1.src" [alt]="IMAGES.vegetables_bag_1.title" width="300px" height="auto"/>
+        </div>
+        <form class="d-flex flex-column justify-content-between darker-text w-50 py-2" [formGroup]="firstStepForm" (ngSubmit)="finishFirstStep()" (change)="firstStepError = ''">
+            <div class="ms-auto">
+                <a routerLink="/">Already a user ?</a>
+            </div>
+            <div>
+                <label>ID :</label>
+                <input type="text" #input class="app-input" formControlName="personalID" placeholder="9 digits" />
+                <div class="error-message">
+                    <div *ngIf="firstStepForm.get('personalID')?.invalid && firstStepForm.get('personalID')?.dirty || firstStepForm.get('personalID')?.touched" class="text-danger sm-text">
+                        <div *ngIf="firstStepForm.get('personalID')?.errors?.['required']" [@errorMessageState]>This is a required field.</div>
+                        <div *ngIf="firstStepForm.get('personalID')?.errors?.['minlength']" [@errorMessageState]>ID field must be at least 9 digits.</div>
+                        <div *ngIf="firstStepForm.get('personalID')?.errors?.['maxlength']" [@errorMessageState]>ID field must be up to 9 digits</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label>Email :</label>
+                <input type="email" class="app-input" formControlName="email" placeholder="example@mail.com"/>
+                <div class="error-message">
+                    <div *ngIf="firstStepForm.get('email')?.invalid && firstStepForm.get('email')?.dirty || firstStepForm.get('email')?.touched" class="text-danger sm-text">
+                        <div *ngIf="firstStepForm.get('email')?.errors?.['required']" [@errorMessageState]>This is a required field.</div>
+                        <div *ngIf="firstStepForm.get('email')?.errors?.['email']" [@errorMessageState]> Email field must be a valid email address</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label>Password :</label>
+                <input type="password" class="app-input" formControlName="password"/>
+                <div class="error-message">
+                    <div *ngIf="firstStepForm.get('password')?.invalid && firstStepForm.get('password')?.dirty || firstStepForm.get('password')?.touched" class="text-danger sm-text">
+                        <div *ngIf="firstStepForm.get('password')?.errors?.['required']" [@errorMessageState]>This is a required field.</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label>Password Confirm :</label>
+                <input type="password" class="app-input" formControlName="confirmPassword" placeholder="Enter your password again"/>
+                <div class="error-message">
+                    <div *ngIf="firstStepForm.get('confirmPassword')?.invalid && firstStepForm.get('confirmPassword')?.dirty || firstStepForm.get('confirmPassword')?.touched" class="text-danger sm-text">
+                        <div *ngIf="firstStepForm.get('confirmPassword')?.errors?.['required']" [@errorMessageState]>This is a required field.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex">
+                <p class="text-danger error-message flex-grow-1 px-2"> {{ firstStepError }} </p>
+                <button type="submit" [ngClass]="firstStepForm.invalid ? 'dark-bg unclickable' : 'secondary-bg'" class="default-button app-button text-white" [disabled]="firstStepForm.invalid">Confirm</button>
+            </div>
+        </form>
+    </div>
+
+    <div class="d-flex signup-form-container px-3" *ngIf="firstStepCompleted" [@secondFormVisibilityState]="firstStepCompleted">
+        <div class="w-50 d-flex flex-column justify-content-between align-items-center">
+            <div class="d-flex flex-column justify-content-center h-50 text-center">
+                <p class="primary-text primary-font xl-text">Signup</p>
+                <span class="md-text primary-font dark-text">Step 2</span>
+            </div>
+            <img [src]="IMAGES.vegetables_bag_3.src" [alt]="IMAGES.vegetables_bag_3.title" width="320px" height="auto"/>
+        </div>
+        <form class="w-50 d-flex flex-column align-self-center darker-text" [formGroup]="secondStepForm" (ngSubmit)="handleSubmit()" (change)="firstStepError = ''">
+            <div class="ms-auto">
+                <button type="button" class="default-button app-button primary-bg text-white" (click)="firstStepCompleted = false">Return to step 1</button>
+            </div>
+            <div>
+                <label>City :</label>
+                <select formControlName="city" class="app-input">
+                    <option value="">Choose City ...</option>
+                    <option *ngFor="let city of cities" [value]="city">{{ city | capitalizeWord: '-' }}</option>
+                </select>
+                <div class="error-message">
+                    <div *ngIf="secondStepForm.get('city')?.invalid && secondStepForm.get('city')?.dirty || secondStepForm.get('city')?.touched" class="text-danger sm-text">
+                        <div *ngIf="secondStepForm.get('city')?.errors?.['required']" [@errorMessageState]>This is a required field.</div>
+                        <div *ngIf="secondStepForm.get('city')?.errors?.['typeErr'] && secondStepForm.get('city')?.value.length" [@errorMessageState]>City value must be one of the above list</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label>Street :</label>
+                <input type="text" class="app-input" formControlName="street"/>
+                <div class="error-message">
+                    <div *ngIf="secondStepForm.get('street')?.invalid && secondStepForm.get('street')?.dirty || secondStepForm.get('street')?.touched" class="text-danger sm-text">
+                        <div *ngIf="secondStepForm.get('street')?.errors?.['required']" [@errorMessageState]>This is a required field.</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label>First Name :</label>
+                <input type="text" class="app-input" formControlName="firstName"/>
+                <div class="error-message">
+                    <div *ngIf="secondStepForm.get('firstName')?.invalid && secondStepForm.get('firstName')?.dirty || secondStepForm.get('firstName')?.touched" class="text-danger sm-text">
+                        <div *ngIf="secondStepForm.get('firstName')?.errors?.['required']" [@errorMessageState]>This is a required field.</div>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <label>Last Name :</label>
+                <input type="text" class="app-input" formControlName="lastName"/>
+                <div class="error-message">
+                    <div *ngIf="secondStepForm.get('lastName')?.invalid && secondStepForm.get('lastName')?.dirty || secondStepForm.get('lastName')?.touched" class="text-danger sm-text">
+                        <div *ngIf="secondStepForm.get('lastName')?.errors?.['required']" [@errorMessageState]>This is a required field.</div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex">
+                <p class="text-danger error-message flex-grow-1 px-2" [@errorMessageState]> {{ secondStepError }} </p>
+                <button type="submit" [ngClass]="secondStepForm.invalid ? 'dark-bg unclickable' : 'secondary-bg'" class="default-button app-button text-white" [disabled]="secondStepForm.invalid">Sign Up</button>
+            </div>
+        </form>
+    </div>
+</div>

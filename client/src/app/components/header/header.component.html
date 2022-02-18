@@ -1,0 +1,33 @@
+<div class="header-container d-flex darker-text">
+    <div class="flex-grow-1 d-flex align-items-center ms-3">
+        <img [src]="IMAGES.primary_logo.src"[alt]="IMAGES.primary_logo.title" width="220px"/>
+    </div>
+    <div class="d-flex flex-column">
+        <div class="d-flex h-50">
+            <div class="d-flex ms-auto">
+                <div class="d-flex align-items-center px-2"><mat-icon class="primary-text">call</mat-icon> <span class="mx-2">052-6899526</span></div>
+                <div class="d-flex align-items-center px-2"><mat-icon class="primary-text">email</mat-icon> <span class="mx-2">customer@markolet.com</span></div>
+            </div>
+        </div>
+        <div class="d-flex header-bottom h-50">
+            <div class="d-flex align-items-center ms-auto">
+                <div *ngIf="isGuest then guest else user"></div>
+                <ng-template #user>
+                    <div class="d-flex align-items-center px-2">
+                        <span *ngIf="!(fetchingUser$ | async)" class="mx-2 fw-bold">Hello {{ currentUserName | titlecase }}</span>
+                        <span *ngIf="fetchingUser$ | async" class="spinner-border spinner-border-sm secondary-text"></span>
+                        <button class="default-button mx-2 primary-text hoverable-icon" (click)="this.openDialog()" title="Logout"><mat-icon>logout</mat-icon></button>
+                    </div>
+                </ng-template>
+                <ng-template #guest>
+                    <div class="d-flex align-items-center px-2">
+                        <span class="mx-2 fw-bold">Hello Guest</span>
+                    </div>
+                </ng-template>
+                <div *ngIf="!isHomePage" class="mx-3" (click)="navigateToHome()">
+                    <button class="primary-text default-button hoverable-icon clickable"><mat-icon>home</mat-icon></button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

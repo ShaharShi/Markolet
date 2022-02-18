@@ -1,0 +1,16 @@
+<div 
+class="app-frame"
+
+>
+<app-header></app-header>
+<div class="app-content"
+[ngStyle]="{
+    height: innerHeight - 80 + 'px', 
+    maxHeight: innerHeight - 80 + 'px',
+    width: innerWidth + 'px', 
+    maxWidth: innerWidth + 'px'
+}"
+>
+    <router-outlet></router-outlet>
+</div>
+</div>

@@ -1,0 +1,31 @@
+<div class="product-container d-flex flex-column m-2" [ngClass]="editProduct ? 'clickable': ''" [ngClass]="selectedQuantity ? 'active' : 'inactive'">
+    <div class="flex-grow-1 d-flex flex-column p-2">
+        <div class="img-wrapper flex-grow-1 d-flex align-items-center justify-content-center border-bottom bg-lighten">
+            <img [src]="data.imgURL" onerror="this.src = '/assets/default_product_img.png'" [alt]="data.name"/>
+        </div>
+        <div class="flex-grow-1 d-flex flex-column justify-content-center text-center py-2">
+            <span class="secondary-text fw-bold md-text">{{ data.name }}</span>
+            <span class="darker-text sm-text">{{ data.price.toFixed(2) }} ₪ / <span class="dark-text sm-text">{{ data.unit }}</span></span>
+        </div>
+    </div>
+    <div class="quantity-wrapper d-flex justify-content-center align-items-center align-self-center rounded-bottom" [ngClass]="editing ? 'primary-bg' : ''">
+        <div *ngIf="selectedQuantity then quantity else default"></div>
+        <ng-template #quantity>
+            <button class="quantity-button default-button lg-text" *ngIf="showInput || selectedQuantity" (click)="increaseQuantity()">+</button>
+            <span class="flex-grow-1 text-center fw-bold md-text">{{ selectedQuantity }} <span class="sm-text">{{ data.unit }}</span></span>
+            <button class="quantity-button default-button lg-text" *ngIf="showInput || selectedQuantity" (click)="decreaseQuantity()">-</button>
+        </ng-template>
+        <ng-template #default>
+            <button class="default-button qantity-button-default w-100 xl-text" (click)="increaseQuantity()">
+                <div *ngIf="!editProduct" class="d-flex align-items-center justify-content-center">
+                    <span class="edit-caption sm-text"> Add to Cart </span>
+                    <mat-icon class="edit-icon">add_shopping_cart</mat-icon>
+                </div>
+                <div *ngIf="editProduct" class="d-flex align-items-center justify-content-center" (click)="onActiveProductClick()">
+                    <span *ngIf="editing" class="edit-blink md-text"> Editing </span>
+                    <mat-icon *ngIf="!editing">edit</mat-icon>
+                </div>
+            </button>
+        </ng-template>
+    </div>
+</div>

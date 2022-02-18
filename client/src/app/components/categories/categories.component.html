@@ -1,0 +1,22 @@
+<div class="d-flex justify-content-center w-100">
+    <div *ngIf="!(fetchingCategories$ | async)" class="categories-container d-flex flex-wrap justify-content-center dark-text sm-text w-100">
+        <div 
+        *ngFor="let category of categories" 
+        class="d-flex align-items-end mx-4 py-1 clickable fw-bold" 
+        (click)="setCategoryProducts(category._id)"
+        [matTooltip]="category.name"
+        matTooltipPosition="below"
+        [matTooltipClass]="'sm-text primary-text'"
+        >
+            <img #icon
+                [src]="currentCategoryId === category._id ? '/assets/icons/'+category.icon+'_colored.png' : '/assets/icons/'+category.icon+'.png'"
+                (mouseenter)="icon.src = '/assets/icons/'+category.icon+'_colored.png'"
+                (mouseleave)="currentCategoryId !== category._id && icon.src = '/assets/icons/'+category.icon+'.png'"
+                [ngClass]="icon.src.includes('_colored') ? 'active-icon' : 'inactive-icon'"
+                width="35px" 
+                height="35px"
+            />
+        </div>
+    </div>
+    <span *ngIf="fetchingCategories$ | async" class="spinner-border secondary-text"></span>
+</div>

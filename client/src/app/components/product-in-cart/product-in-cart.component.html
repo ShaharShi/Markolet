@@ -1,0 +1,24 @@
+<div class="product-container d-flex border-bottom border-2 " [@fadeInOutState]>
+    <div class="image-wrapper align-self-center me-2">
+        <img [src]="data.product.imgURL" onerror="this.src = '/assets/default_product_img.png'" [alt]="data.product.name"/>
+    </div>
+    <div class="flex-grow-1 d-flex flex-column border-start">
+        <div class="flex-grow-1 d-flex ps-1 pt-1">
+            <p class="flex-grow-1 secondary-text fw-bold md-text">{{ data.product.name | titlecase }}</p>
+            <button *ngIf="!readOnlyCartItem" class="align-self-start default-button darker-text hoverable-icon" (click)="removeCartItem()"> <mat-icon>clear</mat-icon> </button>
+        </div>
+        <div class="d-flex justify-content-between">
+            <div class="d-flex flex-column ps-1">
+                <span class="darker-text fw-bold"> {{ totalPrice.toFixed(2) }}₪</span>
+                <span class="dark-text"> {{ data.product.price.toFixed(2) }}₪ / {{ data.product.unit | lowercase }} </span>
+            </div>
+            <div class="d-flex">
+                <div class="d-flex flex-column">
+                    <button *ngIf="!readOnlyCartItem " class="default-button quantity-button px-2 fs-4 hoverable-icon" (click)="increaseQuantity()"> + </button>
+                    <button *ngIf="!readOnlyCartItem " class="default-button quantity-button px-2 fs-3 hoverable-icon" (click)="decreaseQuantity()"> - </button>
+                </div>
+                <div class="d-flex justify-items-center align-items-center lighten-bg fw-bold px-3 py-1 md-text">{{ data.quantity }}</div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,9 @@
+.search-container > input {
+    width: 100%;
+}
+.search-container > input:focus {
+    border-color: var(--primary-color);
+}
+.search-container > input::placeholder {
+    text-align: center;
+}

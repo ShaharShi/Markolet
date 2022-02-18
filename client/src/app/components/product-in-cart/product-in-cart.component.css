@@ -1,0 +1,19 @@
+.product-container {
+    min-height: 100px;
+    overflow: hidden;
+}
+.image-wrapper {
+    width: 25%;
+    min-width: 25%;
+}
+.image-wrapper img {
+    width: 100%;
+    max-width: 100%;
+    height: auto;
+    max-height: 100%;
+}
+.quantity-button {
+    color: var(--primary-color);
+    animation: resize .4s alternate ease-in-out;
+    transition: all .4s;
+}

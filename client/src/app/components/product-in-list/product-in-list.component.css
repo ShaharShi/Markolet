@@ -1,0 +1,88 @@
+.product-container {
+    flex: 1;
+    position: relative;
+    min-height: 380px;
+    width: 200px;
+    background-color: #fff;
+    border-radius: 5px;
+    transition: all .4s;
+    box-shadow: 5px 6px 12px 1px rgb(0, 0, 0, 0.1);
+}
+.product-container:hover {
+    box-shadow: 5px 6px 12px 1px rgb(0, 0, 0, 0.2);
+}
+
+.img-wrapper {
+    width: 100%;
+    min-height: 190px;
+    height: 190px;
+    max-height: 190px;
+}
+.img-wrapper img {
+    height: auto;
+    width: auto;
+    max-width: 100%;
+    max-height: 90%;
+}
+.quantity-wrapper {
+    width: 100%;
+    padding: 4px;
+    height: 15%;
+    max-height: 15%;
+    color: #fff;
+}
+.quantity-button {
+    padding: 3.5px 10px;
+    color: #fff;
+    transition: all .4s;
+}
+.qantity-button-default {
+    padding: 3px 10px;
+    color: #fff;
+    transition: all .4s;
+}
+.quantity-button:hover {
+    color: var(--secondary-color);
+}
+.active > .quantity-wrapper {
+    background-color: var(--primary-color);
+}
+.inactive > .quantity-wrapper {
+    background-color: var(--dark-color);
+    transition: all .4s;
+}
+.inactive > .quantity-wrapper:hover {
+    background-color: var(--primary-color);
+}
+.edit-caption {
+    padding: .5px 0;
+    display: none;
+}
+.edit-icon {
+    display: block;
+}
+.edit-icon-active {
+    display: block;
+}
+.inactive > .quantity-wrapper:hover .edit-caption {
+    display: inline-block;
+}
+.inactive > .quantity-wrapper:hover .edit-icon {
+    display: none;
+}
+.edit-blink {
+    padding: 0.5px 0;
+    animation: blink 1.5s alternate infinite;
+}
+
+@keyframes blink {
+    0% { opacity: 0 }
+    50% { opacity: 1 }
+    100% { opacity: 0 }
+    
+}
+@media screen and (min-width: 1650px) {
+    .product-container {
+        width: 220px;
+    }
+}

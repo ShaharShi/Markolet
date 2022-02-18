@@ -1,0 +1,72 @@
+<div class="d-flex flex-column h-100 p-2">
+    <div class="d-flex justify-content-between align-items-center w-100 border-bottom py-3"> 
+        <h2 class="d-flex align-items-center m-0 mx-2 fw-bold" [ngClass]="data ? 'primary-text' : 'darker-text'">{{ (data ? data.name : 'Add Product') | titlecase }}</h2>
+        <button class="default-button px-3 primary-text hoverable-icon xl-text" (click)="initialForm()"> <mat-icon>library_add</mat-icon> </button> 
+    </div>
+    <form class="flex-grow-1 d-flex flex-column p-3 md-text dark-text overflow-auto" [formGroup]="form" (ngSubmit)="handleSubmit()" (keyup)="initialFormError()">
+        <div class="d-flex">
+            <div class="d-flex flex-column">
+                <label>Product Name</label>
+                <input type="text" class="app-input" formControlName="name" (blur)="initialFormError()"/>
+                <div class="error-message">
+                    <div *ngIf="form.get('name')?.invalid && form.get('name')?.dirty || form.get('name')?.touched" class="text-danger sm-text">
+                        <div *ngIf="form.get('name')?.errors?.['required']" [@errorMessageState]>This field is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-column ms-4">
+                <label>Price</label>
+                <input type="number" class="app-input" formControlName="price" (blur)="initialFormError()"/>
+                <div class="error-message">
+                    <div *ngIf="form.get('price')?.invalid && form.get('price')?.dirty || form.get('price')?.touched" class="text-danger sm-text">
+                        <div *ngIf="form.get('price')?.errors?.['required']" class="text-nowrap" [@errorMessageState]>This field is required</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="flex-grow-1 d-flex flex-column">
+            <label>Product Image</label>
+            <input type="text" class="app-input" formControlName="imgURL" (blur)="handleURLChange(); initialFormError()" placeholder="Image url"/>
+            <div class="error-message">
+                <div *ngIf="form.get('imgURL')?.invalid && form.get('imgURL')?.dirty || form.get('imgURL')?.touched" class="text-danger sm-text">
+                    <div *ngIf="form.get('imgURL')?.errors?.['required']" [@errorMessageState]>This field is required</div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-center align-items-center w-100 h-100">
+                <img [src]="imageURL" onerror="this.src = '/assets/default_product_img.png'" width="40%" height="auto"/>
+            </div>
+        </div>
+        <div class="d-flex">
+            <div class="d-flex flex-column w-50">
+                <label>Category</label>
+                <select class="app-input" formControlName="categoryID" (blur)="initialFormError()">
+                    <option *ngFor="let category of categories" [value]="category._id">{{ category.name }}</option>
+                </select>
+                <div class="error-message">
+                    <div *ngIf="form.get('categoryID')?.invalid && form.get('categoryID')?.dirty || form.get('categoryID')?.touched" class="text-danger sm-text">
+                        <div *ngIf="form.get('categoryID')?.errors?.['required']" [@errorMessageState]>This field is required</div>
+                    </div>
+                </div>
+            </div>
+            <div class="d-flex flex-column ms-4 w-50">
+                <label>Unit</label>
+                <select class="app-input" formControlName="unit" (blur)="initialFormError()">
+                    <option *ngFor="let unit of units" [value]="unit | lowercase">{{ unit }}</option>
+                </select>
+                <div class="error-message">
+                    <div *ngIf="form.get('unit')?.invalid && form.get('unit')?.dirty || form.get('unit')?.touched" class="text-danger sm-text">
+                        <div *ngIf="form.get('unit')?.errors?.['required']" class="text-nowrap" [@errorMessageState]>This field is required</div>
+                        <div *ngIf="form.get('unit')?.errors?.['typeErr'] && form.get('unit')?.value.length" class="text-nowrap" [@errorMessageState]>Unit value must be one of the above list</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div>
+            <p class="error-message text-danger sm-text">{{ formError }}</p>
+            <div class="d-flex align-items-center">
+                <button type="button" *ngIf="data" class="default-button app-button bg-danger text-white" (click)="openDialog()">Delete Product</button>
+                <button type="submit" class="default-button app-button text-white md-text ms-auto" [ngClass]="form.invalid ? 'dark-bg unclickable' : 'secondary-bg clickable'" [disabled]="form.invalid">Submit</button>
+            </div>
+        </div>
+    </form>
+</div>

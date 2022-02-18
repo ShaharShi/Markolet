@@ -1,0 +1,73 @@
+[{
+  "_id": {
+    "$oid": "61c598f005a703ae44d1f69e"
+  },
+  "name": "Fruits & Vegetables",
+  "icon": "vegetables_fruits"
+},{
+  "_id": {
+    "$oid": "61d0230ca04cce629f5b3d90"
+  },
+  "name": "Milk & Eggs",
+  "icon": "milk_eggs"
+},{
+  "_id": {
+    "$oid": "61f401eff4d90442a9d197a3"
+  },
+  "name": "Fish & Meat",
+  "icon": "fish_meat"
+},{
+  "_id": {
+    "$oid": "61f401eff4d90442a9d197a4"
+  },
+  "name": "Frozen Foods",
+  "icon": "frozen_foods"
+},{
+  "_id": {
+    "$oid": "61f401eff4d90442a9d197a5"
+  },
+  "name": "Legumes & Grains",
+  "icon": "legumes_grains"
+},{
+  "_id": {
+    "$oid": "61f401eff4d90442a9d197a6"
+  },
+  "name": "Snacks & Sweets",
+  "icon": "snacks_sweets"
+},{
+  "_id": {
+    "$oid": "61f401eff4d90442a9d197a7"
+  },
+  "name": "Beverages",
+  "icon": "beverages"
+},{
+  "_id": {
+    "$oid": "61f401eff4d90442a9d197a8"
+  },
+  "name": "Home Decor",
+  "icon": "home_decor"
+},{
+  "_id": {
+    "$oid": "61f401eff4d90442a9d197a9"
+  },
+  "name": "Home Maintenance",
+  "icon": "home_maintenance"
+},{
+  "_id": {
+    "$oid": "61f401eff4d90442a9d197aa"
+  },
+  "name": "Animals",
+  "icon": "animals"
+},{
+  "_id": {
+    "$oid": "61f401eff4d90442a9d197ab"
+  },
+  "name": "Babies",
+  "icon": "babies"
+},{
+  "_id": {
+    "$oid": "61f401eff4d90442a9d197ac"
+  },
+  "name": "Bakery",
+  "icon": "bakery"
+}]
