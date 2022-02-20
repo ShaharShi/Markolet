@@ -31,7 +31,12 @@ app.use(expressJwt({ secret: JWT_SECRET, algorithms: ['HS256'] }).unless({
   
 app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   const apiPossiblePathes = ['/api/auth/', '/api/products/', '/api/carts/', '/api/categories/', 'api/orders/'];
+  console.log('--------');
+  console.log(err.name);
+  console.log(req.url);
   if (!apiPossiblePathes.includes(req.url)) return res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
+  console.log('Continue to API');
+  console.log('--------');
   next()
 });
 app.use('/api/auth', authRouter);
