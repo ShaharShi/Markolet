@@ -34,7 +34,7 @@ app.use((err: Error, req: Request, res: Response, next: NextFunction) => {
   console.log('--------');
   console.log(err.name);
   console.log(req.url);
-  if (!apiPossiblePathes.includes(req.url)) return res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
+  if (!apiPossiblePathes.includes(req.url)) res.sendFile(path.resolve(__dirname, 'client', 'dist', 'index.html'));
   console.log('Continue to API');
   console.log('--------');
   next()
